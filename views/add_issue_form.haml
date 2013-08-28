@@ -1,0 +1,18 @@
+// This will have an array passed into it somehow 
+// then will iterate over it
+
+%h1= 'Add a new issue'
+  
+%form{:action => "/addIssue", :id => 'newissue', :method => "post"}
+  Name 
+  %input{:type => "text", :name => "name"}
+  %br
+  Issue Number
+  %input{:type => "text", :name => "issuenumber"}
+  %br
+  Publisher
+  %select{:name => "publisherid"}
+    - @publishers.each do |id,name|
+      %option{:value => "#{id}"}#{name}
+  %br
+  %input{:type => "submit"}

@@ -1,0 +1,11 @@
+// This will have an array passed into it somehow 
+// then will iterate over it
+
+%h1= 'Add a new publisher'
+  
+%form{:action => "/addPublisher", :method => "post"}
+  Name 
+  %input{:type => "text", :name => "name"}
+  %br
+  %br
+  %input{:type => "submit"}

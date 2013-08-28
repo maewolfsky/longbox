@@ -1,0 +1,7 @@
+// This will have an array passed into it somehow 
+// then will iterate over it
+
+%h1= "List of Titles"
+- @titles.each do |name|
+  %p 
+    %a{:href => "http://localhost:4567/title/#{name[0]}"} #{name[0]}
