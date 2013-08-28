@@ -61,25 +61,34 @@ end
 
 # Test to make sure data is in the database
 def test
+  puts "Comics in the database"
   @db.execute("select * from comics") do |row|
     p row
   end
 
+  puts "Publishers in the database"
   @db.execute("select * from publishers") do |row|
+
     p row
   end 
 end
 
 
-@db = SQLite3::Database.new "../data/comidddcs.db"
+@db = SQLite3::Database.new "../data/comics.db"
 
-
-# IF database file doesn't exist, create it 
-#initialize_database(db)
-#initialize_publishers(db)
-
-# Bulk load some data
-#load_data(db, "comics.csv")
-
-
-#test()
+case ARGV[0]
+when "test"
+  test()
+when "init"
+  initialize_database()
+  initialize_publishers()
+when "load"
+  unless (ARGV[1])
+    puts "Please specify a csv file to load from on the command line:"
+    puts "  ruby batch.rb load data.csv"
+    exit(1)
+  end
+  load_data(ARGV[1])
+else
+  puts "Usage: batch.rb [ init | load | test ]"
+end
