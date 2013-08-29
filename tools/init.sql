@@ -1,6 +1,6 @@
 # SQL to initialize a sqlite database for comics
 
-CREATE TABLE publisher ( 
+CREATE TABLE publishers ( 
     id integer primary key,
     name text
 );
