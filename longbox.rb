@@ -10,7 +10,7 @@ titles_by_publisher = 'select distinct comics.title from comics inner join publi
 
 
 get '/' do
-  "Hello World!"
+  haml :index
 end
 
 
@@ -81,5 +81,19 @@ end
 
 # Form action for adding an issue
 post '/addIssue' do
-  "Title: #{params[:name]} Issue: #{params[:issuenumber]} Publisher ID:#{params[:publisherid]} "
+  db.execute('insert into comics (title,issue,publisher) values (?,?,?)', params[:name], params[:issuenumber], params[:publisherid])
+  # Call the /title/:name/:issuenumber on success?  Or just display a message and have a redirect in x seconds to the addIssue page
+  haml "Created Title: #{params[:name]} Issue: #{params[:issuenumber]}"
+end
+
+
+# Display the form for adding a title
+# These aren't ready to go yet, the db schema doesn't have a 
+#  separated Title
+get '/addTitle' do
+end
+
+
+# Form action for adding a title
+post '/addTitle' do
 end
