@@ -9,7 +9,7 @@
   %br
   Publisher
   %select{:name => "publisherid"}
-    - @publishers.each do |id,name|
-      %option{:value => "#{id}"}#{name}
+    - @publishers.each do |p|
+      %option{:value => "#{p['id']}"}#{p['name']}
   %br
   %input{:type => "submit"}
