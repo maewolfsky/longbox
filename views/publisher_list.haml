@@ -1,4 +1,4 @@
 %h1= "List of Publishers"
-- @publishers.each do |name|
+- @publishers.each do |p|
   %p 
-    %a{:href => "http://localhost:4567/publisher/#{name[0]}"} #{name[0]}
+    %a{ :href => "http://localhost:4567/publisher/#{p['name']}" } #{p['name']}

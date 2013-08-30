@@ -1,4 +1,4 @@
 %h1= "#{params[:name]}  #{params[:issuenumber]}"
-- @issue.each do |issue|
-  %h2 Number: #{issue[2]}
-  %p Notes: #{issue[4]}
+- @issue.each do |i|
+  %h2 Number: #{i['issue']}
+  %p Notes: #{i['notes']}

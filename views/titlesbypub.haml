@@ -1,5 +1,5 @@
 %h1= "Titles from #{params[:name]}" 
-- @titles.each do |title|
+- @titles.each do |t|
   %p
-    %a{:href => "http://localhost:4567/title/#{title[0]}"} #{title[0]}
+    %a{:href => "http://localhost:4567/title/#{t['title']}"} #{t['title']}
 

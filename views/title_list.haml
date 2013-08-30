@@ -1,4 +1,4 @@
 %h1= "List of Titles"
-- @titles.each do |name|
+- @titles.each do |t|
   %p 
-    %a{:href => "http://localhost:4567/title/#{name[0]}"} #{name[0]}
+    %a{:href => "http://localhost:4567/title/#{t['title']}"} #{t['title']}

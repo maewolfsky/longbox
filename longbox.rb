@@ -3,9 +3,10 @@ require 'haml'
 require 'sqlite3'
 
 db = SQLite3::Database.new "data/comics.db"
+db.results_as_hash = true  # Make my life easier later if things are added to the schema
 
 pubs_select = 'select name from publishers order by name ASC'
-titleselect = db.prepare('select issue,notes from comics where title is ?')
+titleselect = 'select issue,notes from comics where title is ?'
 titles_by_publisher = 'select distinct comics.title from comics inner join publishers on comics.publisher=publishers.id where publishers.name is ? order by comics.title ASC'
 
 
@@ -38,7 +39,7 @@ end
 
 # Display all the issues in the database of a given title
 get '/title/:name' do |name|
-  rows = titleselect.execute!(name)
+  rows = db.execute(titleselect, name)
   @titles = rows.sort { |x,y| x[0].to_i <=> y[0].to_i }
   
   haml :titles
