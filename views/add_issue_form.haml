@@ -2,14 +2,17 @@
   
 %form{:action => "/addIssue", :id => 'newissue', :method => "post"}
   Name 
-  %input{:type => "text", :name => "name"}
+  %input{:type => "text", :name => "name", :maxlength => 40}
   %br
   Issue Number
-  %input{:type => "text", :name => "issuenumber"}
+  %input{:type => "text", :name => "issuenumber", :maxlength => 10}
   %br
   Publisher
   %select{:name => "publisherid"}
     - @publishers.each do |p|
       %option{:value => "#{p['id']}"}#{p['name']}
+  %br
+  Notes
+  %input{:type => "text", :name => "notes", :maxlength => 256}
   %br
   %input{:type => "submit"}
