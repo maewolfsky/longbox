@@ -1,0 +1,20 @@
+%h1= 'Modify Issue'
+  
+%form{:action => "/modifyIssue", :method => "post"}
+  Name 
+  %input{:type => "text", :name => "title", :value => "#{@issue['title']}" }
+  %br
+  Issue Number
+  %input{:type => "text", :name => "issuenumber", :value => "#{@issue['issue']}"}
+  %br
+  Publisher
+  %select{:name => "publisherid"}
+    - @publishers.each do |p|
+      - if p['id'] == @issue['publisher']
+        %option{:value => "#{p['id']}", :selected => "selected"}#{p['name']}
+      - else
+        %option{:value => "#{p['id']}"}#{p['name']}
+  %br
+  %input{:type => "text", :name => "notes", :value => "#{@issue['notes']}" }
+  %input{:type => "hidden", :name => "issueid", :value => "#{@issue['id']}"}
+  %input{:type => "submit"}

@@ -91,6 +91,25 @@ post '/addIssue' do
 end
 
 
+# Display form for modifying an issue
+get '/modifyIssue/:id' do |id|
+  @publishers = db.execute('select id,name from publishers order by name ASC')
+  @issue = db.execute('select id,title,issue,publisher,notes from comics where id = ?', id)[0]
+  haml :modify_issue_form, :locals => {:issue => @issue[0]}
+end
+
+
+# Form action for modifying an existing issue
+post '/modifyIssue' do
+  db.execute(
+    'update comics set title=?, issue=?, publisher=?, notes=? where id=?',
+    params[:title], params[:issuenumber],
+    params[:publisherid], params[:notes],
+    params[:issueid])
+  redirect("/title/#{params[:title]}/#{params[:issuenumber]}")
+end
+
+
 # Display the form for adding a title
 # These aren't ready to go yet, the db schema doesn't have a 
 #  separated Title
