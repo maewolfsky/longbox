@@ -6,7 +6,7 @@ db = SQLite3::Database.new "data/comics.db"
 db.results_as_hash = true  # Make my life easier later if things are added to the schema
 
 pubs_select = 'select name from publishers order by name ASC'
-titleselect = 'select issue,notes from comics where title is ?'
+titleselect = 'select * from comics where title is ?'
 titles_by_publisher = 'select distinct comics.title from comics inner join publishers on comics.publisher=publishers.id where publishers.name is ? order by comics.title ASC'
 
 
@@ -110,13 +110,8 @@ post '/modifyIssue' do
 end
 
 
-# Display the form for adding a title
-# These aren't ready to go yet, the db schema doesn't have a 
-#  separated Title
-get '/addTitle' do
-end
-
-
-# Form action for adding a title
-post '/addTitle' do
+# Delete the issue identified by id
+get '/deleteIssue/:id' do |id|
+  db.execute('delete from comics where id=?', id)
+  haml "Deleted issue with id: #{id}"
 end

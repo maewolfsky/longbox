@@ -3,3 +3,5 @@
   %p
     %a{:href => "http://localhost:4567/title/#{params[:name]}/#{t['issue']}"} #{t['issue']}  
     Notes: #{t['notes']}
+    %a.action{:href => "/modifyIssue/#{t['id']}"} Modify
+    %a.action{:href => "/deleteIssue/#{t['id']}"} Delete
