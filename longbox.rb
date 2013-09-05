@@ -49,7 +49,7 @@ end
 # Display specific infomation about a given title and issue number
 get '/title/:name/:issuenumber' do |name, issuenumber|
   @issue = db.execute('select * from comics where title is ? and issue is ?', name, issuenumber)
-  haml :issue
+  haml :title_name_issuenumber
 end
 
 
