@@ -18,14 +18,14 @@ end
 # Display the publishers in the database
 get '/publishers' do
   @publishers = db.execute(pubs_select)
-  haml :publisher_list 
+  haml :publishers 
 end
 
 
 # Display all the titles in the database by the given publisher
 get '/publisher/:name' do |name|
   @titles = db.execute(titles_by_publisher, name)
-  haml :titlesbypub
+  haml :publisher_name
 end
 
 
@@ -42,7 +42,7 @@ get '/title/:name' do |name|
   rows = db.execute(titleselect, name)
   @titles = rows.sort { |x,y| x[0].to_i <=> y[0].to_i }
   
-  haml :titles
+  haml :title_name
 end
 
 
