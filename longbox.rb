@@ -33,7 +33,7 @@ end
 get '/titles' do
   # Show a clickable list of all titles that are in the database
   @titles = db.execute('select distinct title from comics order by title ASC')
-  haml :title_list
+  haml :titles
 end
 
 
@@ -55,7 +55,7 @@ end
 
 # Display the form for adding a publisher
 get '/addPublisher' do
-  haml :add_publisher_form
+  haml :addpublisher
 end
 
 
@@ -76,7 +76,7 @@ end
 # Display the form for adding an issue
 get '/addIssue' do
   @publishers = db.execute('select id,name from publishers order by name ASC')
-  haml :add_issue_form
+  haml :addissue
 end
 
 
@@ -95,7 +95,7 @@ end
 get '/modifyIssue/:id' do |id|
   @publishers = db.execute('select id,name from publishers order by name ASC')
   @issue = db.execute('select id,title,issue,publisher,notes from comics where id = ?', id)[0]
-  haml :modify_issue_form, :locals => {:issue => @issue[0]}
+  haml :modifyissue, :locals => {:issue => @issue[0]}
 end
 
 
