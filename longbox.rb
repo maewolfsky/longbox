@@ -5,7 +5,7 @@ require 'sqlite3'
 db = SQLite3::Database.new "data/comics.db"
 db.results_as_hash = true  # Make my life easier later if things are added to the schema
 
-pubs_select = 'select name from publishers order by name ASC'
+allpubs = 'select * from publishers order by name ASC'
 titleselect = 'select * from comics where title is ?'
 titles_by_publisher = 'select distinct comics.title from comics inner join publishers on comics.publisher=publishers.id where publishers.name is ? order by comics.title ASC'
 
@@ -17,7 +17,7 @@ end
 
 # Display the publishers in the database
 get '/publishers' do
-  @publishers = db.execute(pubs_select)
+  @publishers = db.execute(allpubs)
   haml :publishers 
 end
 
@@ -75,7 +75,7 @@ end
 
 # Display the form for adding an issue
 get '/addIssue' do
-  @publishers = db.execute('select id,name from publishers order by name ASC')
+  @publishers = db.execute(allpubs)
   haml :addissue
 end
 
@@ -93,7 +93,7 @@ end
 
 # Display form for modifying an issue
 get '/modifyIssue/:id' do |id|
-  @publishers = db.execute('select id,name from publishers order by name ASC')
+  @publishers = db.execute(allpubs)
   @issue = db.execute('select id,title,issue,publisher,notes from comics where id = ?', id)[0]
   haml :modifyissue, :locals => {:issue => @issue[0]}
 end
