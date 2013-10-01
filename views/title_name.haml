@@ -1,3 +1,9 @@
+%a.action{:href => "/"} Home
+>
+%a.action{:href => "/titles"} All Titles
+>
+%a.action{:href => "/addIssue/#{params[:name]}"}Add another #{params[:name]}
+
 %h1= params[:name]
 - @titles.each do |t|
   %p
