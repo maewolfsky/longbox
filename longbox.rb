@@ -80,6 +80,12 @@ get '/addIssue' do
 end
 
 
+get '/addIssue/:name' do |name|
+  @publishers = db.execute(allpubs)
+  haml :addissue
+end
+
+
 # Form action for adding an issue
 post '/addIssue' do
   db.execute(

@@ -1,8 +1,10 @@
+%a.action{:href => "/"} Home
+
 %h1= 'Add a new issue'
   
 %form{:action => "/addIssue", :id => 'newissue', :method => "post"}
-  Name 
-  %input{:type => "text", :name => "name", :maxlength => 40}
+  Name
+  %input{:type => "text", :name => "name", :maxlength => 40, :value => "#{params[:name]}" } 
   %br
   Issue Number
   %input{:type => "text", :name => "issuenumber", :maxlength => 10}
