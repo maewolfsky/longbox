@@ -67,6 +67,7 @@ post '/addPublisher' do
   if (rows.empty?)
     # No rows were returned, so the publisher doesn't already exist
     db.execute('insert into publishers (name) values (?)', params[:name])
+    redirect to('/publishers')
   else
     haml "%h2 A publisher named #{params[:name]} already exists"
   end
@@ -93,7 +94,7 @@ post '/addIssue' do
     params[:name], params[:issuenumber], params[:publisherid], params[:notes]
   )
   # Call the /title/:name/:issuenumber on success?  Or just display a message and have a redirect in x seconds to the addIssue page
-  haml "Created Title: #{params[:name]} Issue: #{params[:issuenumber]}"
+  redirect to("/title/#{URI.escape(params[:name])}/#{URI.escape(params[:issuenumber])}")
 end
 
 
@@ -112,12 +113,12 @@ post '/modifyIssue' do
     params[:title], params[:issuenumber],
     params[:publisherid], params[:notes],
     params[:issueid])
-  redirect("/title/#{params[:title]}/#{params[:issuenumber]}")
+  redirect to("/title/#{URI.escape(params[:title])}/#{URI.escape(params[:issuenumber])}")
 end
 
 
 # Delete the issue identified by id
 get '/deleteIssue/:id' do |id|
   db.execute('delete from comics where id=?', id)
-  haml "Deleted issue with id: #{id}"
+  redirect to("/titles")
 end
