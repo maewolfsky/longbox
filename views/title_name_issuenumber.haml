@@ -1,3 +1,9 @@
+%a.action{:href => "/"} Home
+>
+%a.action{:href => "/titles"} All Titles
+>
+%a.action{:href => "/title/#{URI.escape(params[:name])}"}#{params[:name]}
+
 %h1= "#{params[:name]}  #{params[:issuenumber]}"
 - @issue.each do |i|
   %h2 Number: #{i['issue']}
