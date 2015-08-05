@@ -1,3 +1,7 @@
+#!/usr/bin/ruby
+require 'rubygems'
+require 'bundler/setup'
+
 require 'sinatra'
 require 'haml'
 require 'sqlite3'
@@ -18,7 +22,7 @@ end
 # Display the publishers in the database
 get '/publishers' do
   @publishers = db.execute(allpubs)
-  haml :publishers 
+  haml :publishers
 end
 
 
@@ -90,7 +94,7 @@ end
 # Form action for adding an issue
 post '/addIssue' do
   db.execute(
-    'insert into comics (title,issue,publisher,notes) values (?,?,?,?)', 
+    'insert into comics (title,issue,publisher,notes) values (?,?,?,?)',
     params[:name], params[:issuenumber], params[:publisherid], params[:notes]
   )
   # Call the /title/:name/:issuenumber on success?  Or just display a message and have a redirect in x seconds to the addIssue page
